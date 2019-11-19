@@ -11,7 +11,7 @@ from utils import get_cur_time_ms
 from utils import log_config
 
 from ws_client import BetaExWsClient
-from ws_client import CHAN_TRADE, CHAN_TICKER, CHAN_ORDERBOOK, CHAN_KLINE
+from ws_client import CHAN_TRADE, CHAN_TICKER, CHAN_ORDERBOOK, CHAN_KLINE, KLINE_INTERVAL_1M
 
 WS_BASE_URL = 'wss://ws.betaex.com/sub'
 
