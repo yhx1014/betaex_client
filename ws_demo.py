@@ -19,7 +19,7 @@ WS_BASE_URL = 'wss://ws.betaex.com/sub'
 class BetaExWsClientDemo(BetaExWsClient):
     @coroutine
     def on_message(self, msg):
-        print 'BetaExWsClientDemo, on_message=', msg
+        print ('BetaExWsClientDemo, on_message=', msg)
         msg_json = json.loads(msg)
         yield self.message_dispatch(msg)
 

@@ -97,11 +97,11 @@ class BetaExWsClient(object):
 
     @coroutine
     def on_connected(self):
-        print 'on_connected'
+        print ('on_connected')
 
     @coroutine
     def on_message(self, msg):
-        print 'on_message, ', msg
+        print ('on_message, ', msg)
 
 
     def is_ws_dead(self):
