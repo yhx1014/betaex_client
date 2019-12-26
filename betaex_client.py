@@ -42,7 +42,9 @@ def get_cur_time_ms():
 
 
 class BetaExClientBase(object):
-    def __init__(self, api_base_url):
+    def __init__(self, api_base_url, api_key, api_secret):
+        self.api_key = api_key
+        self.api_secret = api_secret
         self.base_url = api_base_url
         self.private_url_base = self.base_url + API_KEY_PRIVATE_PATH
         self.public_url_base = self.base_url + API_KEY_PUBLIC_PATH
@@ -91,9 +93,7 @@ class BetaExApiKeyClient(BetaExClientBase):
     Use api_key/api_secret as auth
     """
     def __init__(self, url_base, api_key=None, api_secret=None):
-        super(BetaExApiKeyClient, self).__init__(url_base)
-        self.api_key = api_key
-        self.api_secret = api_secret
+        super(BetaExApiKeyClient, self).__init__(url_base, api_key, api_secret)
     
     def get_timestamp_ms(self):
         url = self.public_url_base + '/timestamp'
@@ -184,7 +184,7 @@ class BetaExApiKeyClient(BetaExClientBase):
         if data['state']:
             assert data['state'] in ORDER_STATE_OPEN
 
-        data_str = self.get_data_str(data);
+        data_str = self.get_data_str(data)
         signed_headers = self.get_signed_headers(data_str)
 
         ret = self.send_request(url, None, data_str, 'POST', signed_headers)
@@ -202,7 +202,7 @@ class BetaExApiKeyClient(BetaExClientBase):
         if data['state']:
             assert data['state'] in ORDER_STATE_CLOSED
 
-        data_str = self.get_data_str(data);
+        data_str = self.get_data_str(data)
         signed_headers = self.get_signed_headers(data_str)
 
         url = self.private_url_base + '/order/history/list'
@@ -216,7 +216,7 @@ class BetaExApiKeyClient(BetaExClientBase):
             'end_tm_ms': get_cur_time_ms(),
             'limit': 20
         }
-        data_str = self.get_data_str(data);
+        data_str = self.get_data_str(data)
         signed_headers = self.get_signed_headers(data_str)
 
         url = self.private_url_base + '/trade/list'
